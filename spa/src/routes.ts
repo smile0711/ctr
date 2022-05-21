@@ -7,6 +7,7 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage.vue";
 import PasswordResetPage from "./pages/PasswordResetPage.vue";
 import WorldBrowserPage from "./pages/world-browser/WorldBrowserPage.vue";
 import CityMapPage from "./pages/CityMapPage.vue";
+import MessageBoard from "./pages/MessageBoard.vue";
 
 export default [
   { path: "/", component: HomePage, name: "home", meta: {
@@ -34,5 +35,7 @@ export default [
   { path: "/citymap", component: CityMapPage, name: "city_map", meta: {
       title: "City Map",
     } },
+  { path: "/msb/:id", component: MessageBoard, name: "message_board", meta: {
+      title: "Message Board"
+    } },
 ];
-
