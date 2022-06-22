@@ -1,5 +1,5 @@
 <template>
-<div class="MessageBoard">
+<div class="flex-1 flex">
 {{ info.name }}'s Message Board
 </div>
 </template>
@@ -20,8 +20,8 @@ export default Vue.extend({
   },
   methods: {
     async getPlace(): Promise<void> {
-      return this.$http.get("/msb/" + this.$route.params.id).then((response) => {
-        this.info === response.data.place;
+      return this.$http.get("/messageboard/" + this.$route.params.id).then((response) => {
+        response.data.info;
       })
     },
   }

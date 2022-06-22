@@ -1,6 +1,9 @@
 import { Request, Response} from 'express';
 
-import { db } from '../db';
+import { 
+  db,
+  knex,
+} from '../db';
 
 class MessageboardController {
 
@@ -10,8 +13,11 @@ class MessageboardController {
   public async getPlace(request: Request, response: Response): Promise<void> {
     const { slug } = request.params;
     try {
-      const [place] = await db.place.where({ slug });
-      response.status(200).json({ placename });
+      const info = await knex
+      .select('place.name')
+      .from('place')
+      .where('place.slug', { slug });
+      response.status(200).json({ info });
     } catch (error) {
       console.error(error);
       response.status(400).json({ error });
