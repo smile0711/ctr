@@ -1,6 +1,6 @@
 <template>
-<div class="messageboard">
-{{placename}}'s Message Board
+<div class="MessageBoard">
+{{ info.name }}'s Message Board
 </div>
 </template>
 <script lang="ts">
@@ -15,19 +15,15 @@ export default Vue.extend({
   name: "MessageBoard",
   data: () => {
     return {
-      place: undefined,
+      info: undefined,
     };
   },
-});
-
-getPlace(): Promise<void> {
-  return Promise.all([
-    this.$http.get("/msb/" + this.$route.params.id),
-  ]).then((response) => {
-    this.place = response[0].data.place;
-    document.title = this.place.name + " - Message Board - Cybertown";
-    this.placename = this.place.name;
+  methods: {
+    async getPlace(): Promise<void> {
+      return this.$http.get("/msb/" + this.$route.params.id).then((response) => {
+        this.info === response.data.place;
+      })
+    },
   }
-  )
-}
+});
 </script>

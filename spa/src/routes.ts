@@ -35,7 +35,7 @@ export default [
   { path: "/citymap", component: CityMapPage, name: "city_map", meta: {
       title: "City Map",
     } },
-  { path: "/msb/:id", component: MessageBoard, name: "message_board", meta: {
+  { path: "/messageboard/:id", component: MessageBoard, name: "message_board", meta: {
       title: "Message Board"
     } },
 ];
