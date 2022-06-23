@@ -11,6 +11,7 @@ import {
   messageRoutes,
   placeRoutes,
   objectInstanceRoutes,
+  messageboardRoutes,
 } from './routes';
 
 interface HttpException extends Error {
@@ -40,6 +41,7 @@ app.use('/api/place', placeRoutes);
 app.use('/api/message', messageRoutes);
 app.use('/api/object_instance', objectInstanceRoutes);
 app.use('/api/avatar', avatarRoutes);
+app.use('/api/messageboard/', messageboardRoutes);
 
 app.use((request, response, next) => {
   const error = new Error('Not found');
