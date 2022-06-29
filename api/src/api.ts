@@ -41,7 +41,7 @@ app.use('/api/place', placeRoutes);
 app.use('/api/message', messageRoutes);
 app.use('/api/object_instance', objectInstanceRoutes);
 app.use('/api/avatar', avatarRoutes);
-app.use('/api/messageboard/', messageboardRoutes);
+app.use('/api/messageboard', messageboardRoutes);
 
 app.use((request, response, next) => {
   const error = new Error('Not found');

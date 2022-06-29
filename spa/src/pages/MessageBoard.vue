@@ -6,14 +6,13 @@
 <script lang="ts">
 import Vue from 'vue';
 
-/*import {
+import {
   debugMsg,
   environment,
 } from '@/helpers';
-*/
 
 export default Vue.extend({
-  name: "message_board",
+  name: "MessageBoard",
   data: () => {
     return {
       info: "",
@@ -22,7 +21,7 @@ export default Vue.extend({
   methods: {
     async getPlace(): Promise<void> {
       return this.$http.get("/messageboard/" + this.$route.params.id).then((response) => {
-        info: response.data.info;
+        response.data.info;
       })
     },
   },
