@@ -3,7 +3,7 @@ import Router from 'express';
 import { messageboardController } from '../controllers';
 
 const messageboardRoutes = Router();
-messageboardRoutes.get('/messageboard/:placeId',
-  (request, response) => messageboardController.getPlace(request, response));
+messageboardRoutes.get('/messageboard/:id',
+  (request, response) => messageboardController.getInfo(request, response));
 
 export { messageboardRoutes };

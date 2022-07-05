@@ -7,11 +7,14 @@ class MessageboardController {
   constructor() {}
 
   /** Provides data about the place with the given slug */
-  public async getPlace(request: Request, response: Response): Promise<void> {
+  public async getInfo(request: Request, response: Response): Promise<void> {
     const { slug } = request.params;
+    console.log({slug});
     try {
-      const [info] = await db.place.where({ slug });
-      response.status(200).json({ info });
+      const place = await db.place.where({ slug });
+      console.log({place});
+
+      response.status(200).json({place});
     } catch (error) {
       console.error(error);
       response.status(400).json({ error });
