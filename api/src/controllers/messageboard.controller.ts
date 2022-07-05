@@ -14,7 +14,7 @@ class MessageboardController {
       const place = await db.place.where({ slug });
       console.log({place});
 
-      response.status(200).json({place});
+      response.status(200).json({place: place});
     } catch (error) {
       console.error(error);
       response.status(400).json({ error });

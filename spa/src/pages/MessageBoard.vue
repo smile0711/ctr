@@ -21,7 +21,7 @@ export default Vue.extend({
   methods: {
     async getInfo(): Promise<void> {
       return this.$http.get("/messageboard/" + this.$route.params.id).then((response) => {
-        this.place = response[0].data.place;
+        this.place = response.data.place;
       });
     },
   },
