@@ -9,4 +9,3 @@ messageRoutes.post('/place/:placeId',
   (request, response) => messageController.addMessage(request, response));
 
 export { messageRoutes };
-

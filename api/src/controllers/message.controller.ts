@@ -37,14 +37,14 @@ class MessageController {
       });
       return;
     }
-    
+
     if(validator.isEmpty(request.body.body)) {
       response.status(400).json({
         error: 'Message body is required.',
       });
       return;
     }
-    
+
     try {
       const { id } = session;
       const { body } = request.body;
@@ -92,6 +92,7 @@ class MessageController {
         .innerJoin('member', 'message.member_id', 'member.id')
         .orderBy(queryOrder, queryOrderDirection)
         .limit(queryLimit);
+        console.log({messages});        
       response.status(200).json({ messages });
     } catch (error) {
       console.error(error);

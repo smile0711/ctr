@@ -22,4 +22,7 @@ export const db = {
   get place() {
     return knex<Models.Place, Models.Place[]>('place');
   },
+  get messageboard_messages() {
+    return knex<Models.MessageboardMessages, Models.MessageboardMessages[]>('messageboard_messages');
+  },
 };

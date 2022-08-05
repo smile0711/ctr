@@ -24,8 +24,8 @@ body, html {
     h4 {
         @apply text-lg;
     }
-    .btn { 
-        @apply p-1 bg-gray-300 text-black hover:bg-gray-200 active:bg-gray-400; 
+    .btn {
+        @apply p-1 bg-gray-300 text-black hover:bg-gray-200 active:bg-gray-400;
     }
     .input-text {
         @apply text-black p-0.5;
@@ -52,7 +52,7 @@ a {
         color: #fff;
 
     }
-}  
+}
 
 .bg-lines {
     background: linear-gradient(#000000 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 0), #323232;
@@ -151,6 +151,9 @@ table {
 
 }
 
+.link {
+  color: #99ff33;
+}
 
 .citymap {
   display:inline-block;

@@ -2,6 +2,7 @@ import { Model } from './model';
 
 /** Defines a Member object as stored in the db */
 export interface Member extends Model {
+  admin: number,
   avatar_id: number,
   email: string,
   password: string,
