@@ -9,6 +9,7 @@ import { MessageboardMessages } from 'models';
 import { default as dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import sanitizeHtml from 'sanitize-html';
 
 class MessageboardController {
 
@@ -85,6 +86,14 @@ class MessageboardController {
 
   //post a new message to the database
   public async postMessageboardMessage(request: Request, response: Response): Promise<void> {
+    const { slug, subject, body } = request.body;
+    if (!subject) {
+      response.status(400).json({ err: {
+        error: 'A subject is required',
+        body: body,
+      }});
+      return;
+    }
     const session = member.decryptToken(<string> request.headers.apitoken);
     if(!session) {
       response.status(400).json({
@@ -94,9 +103,22 @@ class MessageboardController {
     }
     dayjs.extend(utc);
     dayjs.extend(timezone);
-    const { slug, subject, body } = request.body;
     const date = dayjs().tz('America/New_York').format('ddd, MMMM D, YYYY, h:mm a');
     const user = session.username;
+    const newBody = sanitizeHtml(body, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'font' ]),
+      allowedAttributes: false,
+      selfClosing: [],
+    });
+    if (newBody != body) {
+      console.log(body);
+      console.log(newBody);
+      response.status(403).json({ err: {
+        error: 'Something was wrong with the code utilized. The system has fixed it, hit post again to send.',
+        body: newBody
+      }});
+      return;
+    }
     try {
       const [postmessage] = await db.messageboard_messages
       .insert({
@@ -104,7 +126,7 @@ class MessageboardController {
         date: date,
         user: user,
         subject: subject,
-        message: body,
+        message: newBody,
         reply: 0,
         status: 1,
       });
@@ -166,7 +188,7 @@ console.log(body);
     .select('admin')
     .from('member')
     .where('username', session.username);
-    if (admin != 1) {
+    if (admin.admin != 1) {
       response.status(403).json({error: 'You are not authorized to do that!'});
       return;
     } else {

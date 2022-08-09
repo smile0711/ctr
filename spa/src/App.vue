@@ -200,7 +200,7 @@ export default Vue.extend({
           slug: "",
         },
         /* For the curious developers. These worlds need fixing to work (see dev tools console)
-               
+
                 {
                     'title': 'Employment Office',
                     "slug": "employment"

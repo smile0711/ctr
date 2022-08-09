@@ -27,6 +27,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.2",
+    "sanitize-html": "^2.7.1",
     "validator": "^13.6.0"
   },
   "devDependencies": {

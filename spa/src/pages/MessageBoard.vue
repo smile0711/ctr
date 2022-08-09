@@ -67,6 +67,17 @@
 </div>
 <div v-if="this.active === 'post'">
   <center>
+    <div class="text-red-300 justify-center" v-if="error">
+      {{ error }}
+    </div>
+    <div>
+      <h2>Post a Message</h2>
+    </div>
+    <div class="text-sm text-yellow-200 w-5/12 justify-center border-black border-4">
+      Some HTML coding has been blocked for security reasons.  Basic HTML tags
+      (i.e. &lt;p&gt;, &lt;br&gt;, &lt;a href&gt;, and &lt;img src&gt;) are
+      allowed.  If a disallowed tag is used, an error message will display.
+    </div>
     <lable for="subject">Subject:</lable>&nbsp;&nbsp;
     <input type="text" class="text-black" id="subject" v-model="subject" size="50"/><br><br>
     <lable for="body">Message:</lable><br>
@@ -86,7 +97,8 @@
 <div v-if="this.active === 'manage'">
   <center>
     <textarea id="intro" class="text-black w-2/3 h-96" v-model="intro"></textarea><br><br>
-    <button class="btn" @click="switchView">CANCEL</button>&nbsp;&nbsp;&nbsp;<button type="submit" class="btn" @click="changeMessageboardIntro">UPDATE</button>
+    <button class="btn" @click="switchView">CANCEL</button>&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn" @click="changeMessageboardIntro">UPDATE</button>
   </center>
 </div>
 </div>
@@ -152,13 +164,16 @@ export default Vue.extend({
           subject: this.subject,
           body: this.body,
         });
-      } catch (error) {
-        this.error = error.repsonse.data.error;
-      } finally {
         this.success = 'Message was posted';
+        this.error = '';
         this.active = 'view';
         this.subject = '';
         this.body = '';
+        this.getMessageboardMessages();
+      } catch (err) {
+        this.error = err.response.data.err.error;
+        this.body = err.response.data.err.body;
+        this.success = '';
       }
     },
     async postMessageboardReply(): Promise<void> {
@@ -170,12 +185,13 @@ export default Vue.extend({
           parentid: this.dparentid,
         });
         this.success = 'Reply was posted';
+        this.error = '';
         this.active = 'view';
         this.subject = '';
         this.body = '';
-        this.error = '';
       } catch (error) {
-        this.error = error.response.data.error;
+        this.error = 'Unauthorized HTML Tag Used. The tag(s) have been removed, hit post again to send';
+        this.body = 'testing something';
         this.success = '';
       }
     },
@@ -206,6 +222,7 @@ export default Vue.extend({
         this.success = '';
       } finally {
         this.getMessageboardMessages();
+        this.getInfo();
         this.active = 'view';
       };
     },
