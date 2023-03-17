@@ -71,7 +71,7 @@ export default Vue.extend({
         this.hood = response[0].data.hood;
         this.colony = response[0].data.colony;
         this.locations = response[1].data.locations;
-        this.$store.methods.setPlace(response[0].data);
+        this.$store.methods.setPlace(this.block);
 
         document.title = this.block.name + " - Cybertown";
         this.loaded = true;
