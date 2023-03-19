@@ -2,7 +2,7 @@
   <div class="text-center">
     <span href="" class="btn-ui">Information</span>
     <span href="" class="btn-ui">Inbox</span>
-    <span href="" class="btn-ui">Messages</span>
+    <button class="btn-ui" @click="openMessageboardModal()">Hood Messages</button>
     <span href="" class="btn-ui">Vote</span>
     <router-link
       v-if="this.$store.data.place.colony"
@@ -25,6 +25,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import MessageboardModal from '@/components/modals/MessageboardModal.vue';
+import ModalService from '@/components/modals/services/ModalService.vue';
+
 export default Vue.extend({
   name: "NeighborhoodTools",
   data: () => {
@@ -32,6 +35,11 @@ export default Vue.extend({
       loaded: false,
     };
   },
+  methods: {
+    openMessageboardModal(): void {
+      ModalService.open(MessageboardModal);
+    }
+  }
 });
 </script>
 

@@ -114,6 +114,7 @@ import WorldBrowserPage from "./pages/world-browser/WorldBrowserPage.vue";
 import ModalRoot from "./components/modals/ModalRoot.vue"
 import InfoModal from "./components/modals/InfoModal.vue"
 import ModalService from "./components/modals/services/ModalService.vue"
+import MessageboardModal from './components/modals/MessageboardModal.vue';
 
 declare const X3D: any;
 

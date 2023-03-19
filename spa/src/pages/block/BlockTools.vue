@@ -1,7 +1,7 @@
 <template>
   <div class="text-center" v-if="loaded">
     <span class="btn-ui" >Information</span>
-    <span class="btn-ui" >Messages</span>
+    <button class="btn-ui" @click="openMessageboardModal()">Block Messages</button>
     <router-link
       v-if="this.$store.data.place.hood"
       :to="'/neighborhood/'+this.$store.data.place.hood.id">
@@ -28,6 +28,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import MessageboardModal from '@/components/modals/MessageboardModal.vue';
+import ModalService from '@/components/modals/services/ModalService.vue';
+
 export default Vue.extend({
   name: "BlockTools",
   data: () => {
@@ -35,9 +38,13 @@ export default Vue.extend({
       loaded: false,
     };
   },
+  methods: {
+    openMessageboardModal(): void {
+      ModalService.open(MessageboardModal);
+    }
+  },
   mounted() {
     this.loaded = true;
-
   },
 });
 </script>
