@@ -32,6 +32,7 @@ export async function up(knex: Knex): Promise<void> {
         .notNullable();
             
       table.integer('parent_id', 11)
+        .defaultTo(0)
         .unsigned()
         .notNullable();
             
